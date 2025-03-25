@@ -1,5 +1,5 @@
 package com.example.demo.repositories;
+import com.example.demo.models.User;
 
-public class UserRepository {
-    
+public interface UserRepository extends JpaRepository<User, Long> {
 }
