@@ -40,3 +40,8 @@ docker exec -it container_name bash
 mysql -uroot -p
 ```
 
+#### Accessing Mysql instance directly from local
+
+```
+mysql --host=127.0.0.1 --port=3307 -u root -p
+```
