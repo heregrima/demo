@@ -28,5 +28,12 @@ Spring Boot instance will boot up and bootRun will show as executing when it's r
 
 ### Setup Mysql container
 
-`docker run --name test-mysql -e MYSQL_ROOT_PASSWORD=abc123 -d mysql`
+`docker run --name test-mysql -e MYSQL_ROOT_PASSWORD=[pick something, but remember it] -d mysql`
+
+#### Accessing Mysql container
+
+```
+docker exec -it container_name bash
+mysql -uroot -p
+```
 
