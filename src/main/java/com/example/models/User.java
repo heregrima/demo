@@ -8,7 +8,7 @@ import jakarta.persistence.Id;
 
 
 @Entity
-class User {
+public class User {
 
   private @Id
   @GeneratedValue Long id;
@@ -16,9 +16,9 @@ class User {
   private String lastName;
   private String role;
 
-  Employee() {}
+  public User() {}
 
-  Employee(String firstName, String lastName, String role) {
+  public User(String firstName, String lastName, String role) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.role = role;
