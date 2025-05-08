@@ -61,12 +61,18 @@ public class UserController {
     public User updateUser(@PathVariable Long id, @RequestBody User userRequest) {
         // Updates an existing user
         User user = new User();
+        user.setFirstName(userRequest.getFirstName());
+        user.setLastName(userRequest.getLastName());
+        user.setRole(userRequest.getRole());
+
         return user;
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable Long id) {
-        // Deletes a user
+    public String deleteUserById(@PathVariable Long id) {
+        userRepository.deleteById(id);
+
+        return "Deleted";
     }
     
 }
