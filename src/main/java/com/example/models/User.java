@@ -1,10 +1,18 @@
-package com.example.demo.models;
+package com.example.models;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
+import org.hibernate.engine.internal.Cascade;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 
 
 @Entity
@@ -14,46 +22,52 @@ public class User {
   @GeneratedValue Long id;
   private String firstName;
   private String lastName;
-  private String role;
+
+  @ManyToMany
+  @JoinTable(
+    name = "users_roles",
+    joinColumns = @JoinColumn(name = "user_id"),
+    inverseJoinColumns = @JoinColumn(name = "role_id")
+  )
+  private Set<Role> roles;
 
   public User() {}
 
-  public User(String firstName, String lastName, String role) {
+  public User(String firstName, String lastName) {
     this.firstName = firstName;
     this.lastName = lastName;
-    this.role = role;
   }
 
   public Long getId() {
     return this.id;
   }
 
-  public String getFirstName() {
-    return this.firstName;
-  }
-
-  public String getLastName() {
-    return this.lastName;
-  }
-
-  public String getRole() {
-    return this.role;
-  }
-
   public void setId(Long id) {
     this.id = id;
+  }
+
+  public String getFirstName() {
+    return this.firstName;
   }
 
   public void setFirstName(String firstName) {
     this.firstName = firstName;
   }
 
+  public String getLastName() {
+    return this.lastName;
+  }
+
   public void setLastName(String lastName) {
     this.lastName = lastName;
   }
 
-  public void setRole(String role) {
-    this.role = role;
+  public Set<Role> getRoles() {
+    return this.roles;
+  }
+
+  public void setRole(Set<Role> roles) {
+    this.roles = roles;
   }
 
   @Override
@@ -66,21 +80,19 @@ public class User {
     User user = (User) o;
     return Objects.equals(this.id, user.id) && 
            Objects.equals(this.firstName, user.firstName) &&
-           Objects.equals(this.lastName, user.lastName) &&
-           Objects.equals(this.role, user.role);
+           Objects.equals(this.lastName, user.lastName);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(this.id, this.firstName, this.lastName, this.role);
+    return Objects.hash(this.id, this.firstName, this.lastName);
   }
 
   @Override
   public String toString() {
     return "User{" + "id=" + this.id + ", " + 
            "firstName='" + this.firstName + "\'', " + 
-           "lastName='" + this.lastName + "\'', " + 
-           "role='" + this.role + '\'' + 
+           "lastName='" + this.lastName + '\'' + 
            '}';
   }
 }
