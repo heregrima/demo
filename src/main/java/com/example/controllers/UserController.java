@@ -1,7 +1,6 @@
 package com.example.controllers;
 
 import java.net.URI;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -52,17 +51,7 @@ public class UserController {
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody User userRequest) {
         userRepository.save(userRequest);
-
-        /* 
-        // Creates a new user
-        User user = new User();
-        user.setFirstName(userRequest.getFirstName());
-        user.setLastName(userRequest.getLastName());
-        
-        // save the user
-        userRepository.save(user);
-        */
-
+    
         // set up the return URI for the response based on the id of the newly created User
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
             .path("/{id}")

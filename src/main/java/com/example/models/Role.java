@@ -1,10 +1,13 @@
 package com.example.models;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-import jakarta.persistence.CascadeType;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -16,9 +19,11 @@ public class Role {
 
   private @Id
   @GeneratedValue Long id;
+
   private String roleName;
 
   @ManyToMany(mappedBy = "roles")
+  @JsonIgnore
   private Set<User> users;
 
   public Role() {}
